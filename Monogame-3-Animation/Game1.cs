@@ -20,15 +20,15 @@ namespace Monogame_3_Animation
         Vector2 tribbleCreamSpeed;
 
         Texture2D tribbleBrownTex;
-        Texture2D tribbleBrownRec;
+        Rectangle tribbleBrownRec;
         Vector2 tribbleBrownSpeed;
 
         Texture2D tribbleOrangeTex;
-        Texture2D tribbleOrangeRec;
+        Rectangle tribbleOrangeRec;
         Vector2 tribbleOrangeSpeed;
 
         Texture2D tribbleGreyTex;
-        Texture2D tribbleGreyRec;
+        Rectangle tribbleGreyRec;
         Vector2 tribbleGreySpeed;
         public Game1()
         {
@@ -48,7 +48,14 @@ namespace Monogame_3_Animation
             tribbleCreamRec = new Rectangle(300, 10, 100, 100);
             tribbleCreamSpeed = new Vector2(2, 2);
 
-            //tribbleBrownRec = new Rectangle(300, 10, 100, 100);
+            tribbleBrownRec = new Rectangle(200, 10, 100, 100);
+            tribbleBrownSpeed = new Vector2(2, 0);
+
+            tribbleGreyRec = new Rectangle(200, 400, 100, 100);
+            tribbleBrownSpeed = new Vector2(2, 0);
+
+            tribbleOrangeRec = new Rectangle(400, 300, 100, 100);
+            tribbleBrownSpeed = new Vector2(2, 0);
 
             base.Initialize();
         }
@@ -58,6 +65,9 @@ namespace Monogame_3_Animation
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             tribbleCreamTex = Content.Load<Texture2D>("tribbleCream");
+            tribbleBrownTex = Content.Load<Texture2D>("tribbleBrown");
+            tribbleGreyTex = Content.Load<Texture2D>("tribbleGrey");
+            tribbleOrangeTex = Content.Load<Texture2D>("tribbleOrange");
             tribbleCoo = Content.Load<SoundEffect>("tribble_coo");
 
         }
@@ -73,13 +83,20 @@ namespace Monogame_3_Animation
                 tribbleCreamSpeed.X *= -1;
                 tribbleCoo.Play();
             }
-
             tribbleCreamRec.Y += (int)tribbleCreamSpeed.Y;
             if (tribbleCreamRec.Bottom > window.Height || tribbleCreamRec.Top < 0)
             {
                 tribbleCreamSpeed.Y *= -1;
                 tribbleCoo.Play();
             }
+
+            tribbleBrownRec.X += (int)tribbleBrownSpeed.X;
+            if (tribbleBrownRec.Right > window.Width || tribbleBrownRec.Left < 0)
+            {
+                tribbleBrownSpeed.X *= -1;
+                tribbleCoo.Play();
+            }
+            tribbleBrownRec.Y += (int)tribbleBrownSpeed.Y;
 
             base.Update(gameTime);
         }
@@ -90,7 +107,9 @@ namespace Monogame_3_Animation
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(tribbleCreamTex, tribbleCreamRec, Color.White);
-
+            _spriteBatch.Draw(tribbleBrownTex, tribbleBrownRec, Color.White);
+            _spriteBatch.Draw(tribbleGreyTex, tribbleGreyRec, Color.White);
+            _spriteBatch.Draw(tribbleOrangeTex, tribbleOrangeRec, Color.White);
             _spriteBatch.End();
 
             base.Draw(gameTime);
