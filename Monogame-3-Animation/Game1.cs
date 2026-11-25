@@ -15,7 +15,8 @@ namespace Monogame_3_Animation
 
         SoundEffect tribbleCoo;
 
-        Texture2D nebula;
+        Texture2D nebulaTex;
+        Rectangle nebula;
 
         Texture2D tribbleCreamTex;
         Rectangle tribbleCreamRec;
@@ -47,7 +48,7 @@ namespace Monogame_3_Animation
             _graphics.PreferredBackBufferHeight = window.Height;
             _graphics.ApplyChanges();
 
-            //nebula = new Rectangle(0, 0, Width, Height);
+            nebula = new Rectangle(0, 0, window.Width, window.Height);
 
             tribbleCreamRec = new Rectangle(300, 10, 100, 100);
             tribbleCreamSpeed = new Vector2(2, 2);
@@ -68,6 +69,7 @@ namespace Monogame_3_Animation
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            nebulaTex = Content.Load<Texture2D>("Nebula");
             tribbleCreamTex = Content.Load<Texture2D>("tribbleCream");
             tribbleBrownTex = Content.Load<Texture2D>("tribbleBrown");
             tribbleGreyTex = Content.Load<Texture2D>("tribbleGrey");
@@ -131,6 +133,7 @@ namespace Monogame_3_Animation
             GraphicsDevice.Clear(Color.HotPink);
             _spriteBatch.Begin();
 
+            _spriteBatch.Draw(nebulaTex, nebula, Color.White);
             _spriteBatch.Draw(tribbleCreamTex, tribbleCreamRec, Color.White);
             _spriteBatch.Draw(tribbleBrownTex, tribbleBrownRec, Color.White);
             _spriteBatch.Draw(tribbleGreyTex, tribbleGreyRec, Color.White);
