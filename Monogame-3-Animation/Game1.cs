@@ -15,6 +15,8 @@ namespace Monogame_3_Animation
 
         SoundEffect tribbleCoo;
 
+        Texture2D nebula;
+
         Texture2D tribbleCreamTex;
         Rectangle tribbleCreamRec;
         Vector2 tribbleCreamSpeed;
@@ -45,6 +47,8 @@ namespace Monogame_3_Animation
             _graphics.PreferredBackBufferHeight = window.Height;
             _graphics.ApplyChanges();
 
+            //nebula = new Rectangle(0, 0, Width, Height);
+
             tribbleCreamRec = new Rectangle(300, 10, 100, 100);
             tribbleCreamSpeed = new Vector2(2, 2);
 
@@ -52,10 +56,10 @@ namespace Monogame_3_Animation
             tribbleBrownSpeed = new Vector2(2, 0);
 
             tribbleGreyRec = new Rectangle(200, 400, 100, 100);
-            tribbleBrownSpeed = new Vector2(2, 0);
+            tribbleGreySpeed = new Vector2(4, 1);
 
             tribbleOrangeRec = new Rectangle(400, 300, 100, 100);
-            tribbleBrownSpeed = new Vector2(2, 0);
+            tribbleOrangeSpeed = new Vector2(0, 2);
 
             base.Initialize();
         }
@@ -97,6 +101,27 @@ namespace Monogame_3_Animation
                 tribbleCoo.Play();
             }
             tribbleBrownRec.Y += (int)tribbleBrownSpeed.Y;
+
+            tribbleOrangeRec.Y += (int)tribbleOrangeSpeed.Y;
+            if (tribbleOrangeRec.Bottom > window.Height || tribbleOrangeRec.Top < 0)
+            {
+                tribbleOrangeSpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
+            tribbleOrangeRec.X += (int)tribbleOrangeSpeed.X;
+
+            tribbleGreyRec.X += (int)tribbleGreySpeed.X;
+            if (tribbleGreyRec.Right > window.Width || tribbleGreyRec.Left < 0)
+            {
+                tribbleGreySpeed.X *= -1;
+                tribbleCoo.Play();
+            }
+            tribbleGreyRec.Y += (int)tribbleGreySpeed.Y;
+            if (tribbleGreyRec.Bottom > window.Height || tribbleGreyRec.Top < 0)
+            {
+                tribbleGreySpeed.Y *= -1;
+                tribbleCoo.Play();
+            }
 
             base.Update(gameTime);
         }
