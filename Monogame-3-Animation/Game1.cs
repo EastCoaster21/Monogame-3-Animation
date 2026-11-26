@@ -66,17 +66,17 @@ namespace Monogame_3_Animation
 
             nebula = new Rectangle(0, 0, window.Width, window.Height);
 
-            tribbleCreamRec = new Rectangle(300, 10, 100, 100);
+            tribbleCreamRec = new Rectangle(generator.Next(window.Width - 100), generator.Next(window.Height - 100), 100, 100);
             tribbleCreamSpeed = new Vector2(3, 3);
             tribbleCreamColor = Color.White;
 
-            tribbleBrownRec = new Rectangle(200, 10, 100, 100);
+            tribbleBrownRec = new Rectangle(generator.Next(window.Width - 100), generator.Next(window.Height - 100), 100, 100);
             tribbleBrownSpeed = new Vector2(2, 0);
 
-            tribbleGreyRec = new Rectangle(200, 400, 100, 100);
+            tribbleGreyRec = new Rectangle(generator.Next(window.Width - 100), generator.Next(window.Height - 100), 100, 100);
             tribbleGreySpeed = new Vector2(6, 2);
 
-            tribbleOrangeRec = new Rectangle(400, 300, 100, 100);
+            tribbleOrangeRec = new Rectangle(generator.Next(window.Width-100), generator.Next(window.Height - 100), 100, 100);
             tribbleOrangeSpeed = new Vector2(0, 4);
 
             base.Initialize();
