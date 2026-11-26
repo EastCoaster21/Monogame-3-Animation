@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 
 namespace Monogame_3_Animation
 {
@@ -10,6 +11,10 @@ namespace Monogame_3_Animation
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        List<Color> colors;
+
+        Random generator;
 
         Rectangle window;
 
@@ -21,6 +26,7 @@ namespace Monogame_3_Animation
         Texture2D tribbleCreamTex;
         Rectangle tribbleCreamRec;
         Vector2 tribbleCreamSpeed;
+        Color tribbleCreamColor;
 
         Texture2D tribbleBrownTex;
         Rectangle tribbleBrownRec;
@@ -40,6 +46,11 @@ namespace Monogame_3_Animation
             IsMouseVisible = true;
         }
 
+        public Color RandomColor()
+        {
+            return new Color(generator.Next(256), generator.Next(256), generator.Next(256));
+        }
+
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
@@ -48,10 +59,15 @@ namespace Monogame_3_Animation
             _graphics.PreferredBackBufferHeight = window.Height;
             _graphics.ApplyChanges();
 
+            generator = new Random();
+
+            colors = new List<Color>() { Color.PaleVioletRed, Color.Aquamarine, Color.YellowGreen, new Color (generator.Next(256), generator.Next(256), generator.Next(256)) };
+
             nebula = new Rectangle(0, 0, window.Width, window.Height);
 
             tribbleCreamRec = new Rectangle(300, 10, 100, 100);
-            tribbleCreamSpeed = new Vector2(2, 2);
+            tribbleCreamSpeed = new Vector2(3, 3);
+            tribbleCreamColor = Color.White;
 
             tribbleBrownRec = new Rectangle(200, 10, 100, 100);
             tribbleBrownSpeed = new Vector2(2, 0);
@@ -60,7 +76,7 @@ namespace Monogame_3_Animation
             tribbleGreySpeed = new Vector2(4, 1);
 
             tribbleOrangeRec = new Rectangle(400, 300, 100, 100);
-            tribbleOrangeSpeed = new Vector2(0, 2);
+            tribbleOrangeSpeed = new Vector2(0, 4);
 
             base.Initialize();
         }
@@ -86,6 +102,8 @@ namespace Monogame_3_Animation
             tribbleCreamRec.X += (int)tribbleCreamSpeed.X;
             if (tribbleCreamRec.Right > window.Width || tribbleCreamRec.Left < 0) 
             {
+                colors[colors.Count-1] = RandomColor();
+                tribbleCreamColor = colors[generator.Next(colors.Count)];
                 tribbleCreamSpeed.X *= -1;
                 tribbleCoo.Play();
             }
@@ -134,7 +152,7 @@ namespace Monogame_3_Animation
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(nebulaTex, nebula, Color.White);
-            _spriteBatch.Draw(tribbleCreamTex, tribbleCreamRec, Color.White);
+            _spriteBatch.Draw(tribbleCreamTex, tribbleCreamRec, tribbleCreamColor);
             _spriteBatch.Draw(tribbleBrownTex, tribbleBrownRec, Color.White);
             _spriteBatch.Draw(tribbleGreyTex, tribbleGreyRec, Color.White);
             _spriteBatch.Draw(tribbleOrangeTex, tribbleOrangeRec, Color.White);
