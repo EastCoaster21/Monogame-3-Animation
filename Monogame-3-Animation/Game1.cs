@@ -19,6 +19,7 @@ namespace Monogame_3_Animation
         Rectangle window;
 
         SoundEffect tribbleCoo;
+        SoundEffect scream;
 
         Texture2D nebulaTex;
         Rectangle nebula;
@@ -73,7 +74,7 @@ namespace Monogame_3_Animation
             tribbleBrownSpeed = new Vector2(2, 0);
 
             tribbleGreyRec = new Rectangle(200, 400, 100, 100);
-            tribbleGreySpeed = new Vector2(4, 1);
+            tribbleGreySpeed = new Vector2(6, 2);
 
             tribbleOrangeRec = new Rectangle(400, 300, 100, 100);
             tribbleOrangeSpeed = new Vector2(0, 4);
@@ -91,6 +92,7 @@ namespace Monogame_3_Animation
             tribbleGreyTex = Content.Load<Texture2D>("tribbleGrey");
             tribbleOrangeTex = Content.Load<Texture2D>("tribbleOrange");
             tribbleCoo = Content.Load<SoundEffect>("tribble_coo");
+            scream = Content.Load<SoundEffect>("Scream");
 
         }
 
@@ -110,6 +112,8 @@ namespace Monogame_3_Animation
             tribbleCreamRec.Y += (int)tribbleCreamSpeed.Y;
             if (tribbleCreamRec.Bottom > window.Height || tribbleCreamRec.Top < 0)
             {
+                colors[colors.Count - 1] = RandomColor();
+                tribbleCreamColor = colors[generator.Next(colors.Count)];
                 tribbleCreamSpeed.Y *= -1;
                 tribbleCoo.Play();
             }
@@ -134,13 +138,13 @@ namespace Monogame_3_Animation
             if (tribbleGreyRec.Right > window.Width || tribbleGreyRec.Left < 0)
             {
                 tribbleGreySpeed.X *= -1;
-                tribbleCoo.Play();
+                scream.Play();
             }
             tribbleGreyRec.Y += (int)tribbleGreySpeed.Y;
             if (tribbleGreyRec.Bottom > window.Height || tribbleGreyRec.Top < 0)
             {
                 tribbleGreySpeed.Y *= -1;
-                tribbleCoo.Play();
+                scream.Play();
             }
 
             base.Update(gameTime);

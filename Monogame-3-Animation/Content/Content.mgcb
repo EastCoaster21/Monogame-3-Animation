@@ -26,6 +26,13 @@
 /processorParam:Version=3.8.6.1
 /build:Nebula.png
 
+#begin Scream.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.6.1
+/build:Scream.wav
+
 #begin tribble_coo.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
